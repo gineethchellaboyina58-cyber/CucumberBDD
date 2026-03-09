@@ -13,6 +13,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.asserts.Assertion;
 
 
@@ -138,6 +140,33 @@ public class functionLibrary {
 		
 		
 	}
+	
+	//capture supplier number
+			public static void captureCusNumber(String Locatortype,String Locatorvalue)
+			{
+				expectedNum = driver.findElement(By.name(Locatorvalue)).getAttribute("value");
+			}
+			//method to validate table
+			public static void customerTable() throws Throwable
+			{
+				if(!driver.findElement(By.xpath(conpro.getProperty("searchtextbox"))).isDisplayed()){
+					driver.findElement(By.xpath(conpro.getProperty("searchpanel"))).click();
+				}
+				Thread.sleep(2000);
+				driver.findElement(By.xpath(conpro.getProperty("searchtextbox"))).clear();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath(conpro.getProperty("searchtextbox"))).sendKeys(expectedNum);
+				Thread.sleep(2000);
+				driver.findElement(By.xpath(conpro.getProperty("Clicksearchbtn"))).click();
+				Thread.sleep(2000);
+				actualNum = driver.findElement(By.xpath("//table[@class='table ewTable']/tbody/tr[1]/td[5]/div/span/span")).getText();
+				try {
+					org.testng.Assert.assertEquals(actualNum, expectedNum,"customer num is not founded");
+					
+				} catch (Throwable e) {
+					System.out.println(e.getMessage());
+				}
+			}
 	//method for closeBsr
 	public static void closeBwsr() {
 		driver.quit();

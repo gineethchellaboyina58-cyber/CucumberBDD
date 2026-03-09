@@ -106,4 +106,32 @@ public void close_app_browser() {
     functionLibrary.closeBwsr();
 }
 
+//customer module
+@When("wait for customer link with {string} and {string}")
+public void wait_forustomerlink(String loctype, String locval) {
+	functionLibrary.waitforElement(loctype, locval, "10");
+   
+}
+@When("click that customer link with {string} and {string}")
+public void click_customerlink(String loctype, String locval) {
+	functionLibrary.clickAction(loctype, locval);
+    
+}
+@When("wait for customer number with {string} and {string}")
+public void wait_customernumber(String loctype, String locval) {
+	functionLibrary.waitforElement(loctype, locval, "10");
+   
+}
+@When("capture that customer number with {string} and {string}")
+public void capture_customer_number(String loctype, String locval) {
+	functionLibrary.captureCusNumber(loctype, locval);
+    
+}
+@Then("Verify customer number")
+public void verify_customernumber() throws Throwable {
+	functionLibrary.customerTable();
+    
+}
+
+
 }
